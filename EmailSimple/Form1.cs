@@ -40,11 +40,12 @@ namespace EmailSimple
             sb.Append(d.Millisecond.ToString().PadLeft(3, '0'));
             sb.Append(" | ");
             sb.Append(entry);
-            this.listBox1.Items.Insert(0, sb.ToString());
+            this.listBox1.Items.Add(sb.ToString());
         }
 
         private void btnReceive_Click(object sender, EventArgs e)
         {
+            this.listBox1.Items.Clear();
             // We instantiate the pop3 client.
             Pop3Client pop = new Pop3Client();
 
@@ -54,30 +55,25 @@ namespace EmailSimple
 
             try
             {
-                this.AddLogEntry(string.Format("Connection to the pop 3 server : {0}", server));
-
-                // Connect to the pop3 client
                 pop.Connect(server, username, password);
 
                 int count = pop.MessageCount;
 
-                this.AddLogEntry("Retrieve message list");
+                this.AddLogEntry(string.Format("共收到{0}封 ：", count));
 
                 MessageCollection mc = new MessageCollection();
 
-                ActiveUp.Net.Mail.Message newMessage = pop.RetrieveMessageObject(count);
-                mc.Add(newMessage);
-                this.AddLogEntry(string.Format("Message ({0}) : {1}", count.ToString(), newMessage.Subject));
+                //ActiveUp.Net.Mail.Message newMessage = pop.RetrieveMessageObject(count);
+                //mc.Add(newMessage);
+                // this.AddLogEntry(string.Format("Message ({0}) : {1}", count.ToString(), newMessage.Subject));
 
-                //for (int n = 1; n < pop.MessageCount + 1; n++)
-                //{
-                //    pop.RetrieveMessageObject(n);
-                //    mc.Add(newMessage);
-                //    this.AddLogEntry(string.Format("Message ({0}) : {1}", n.ToString(), newMessage.Subject));
-                //}
+                for (int n = count; n >= 1; n--)
+                {
+                    var msg = pop.RetrieveMessageObject(n);
+                    this.AddLogEntry(string.Format("{0}-({1}) : {2}", n.ToString(), msg.Date.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"), msg.Subject));
+                }
 
             }
-
             catch (Pop3Exception pexp)
             {
                 this.AddLogEntry(string.Format("Pop3 Error: {0}", pexp.Message));

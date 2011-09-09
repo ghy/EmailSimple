@@ -63,7 +63,7 @@
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(168, 21);
             this.txtServer.TabIndex = 2;
-            this.txtServer.Text = "pop.qq.com";
+            this.txtServer.Text = "pop.126.com";
             // 
             // label2
             // 
@@ -80,7 +80,7 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(168, 21);
             this.txtUserName.TabIndex = 2;
-            this.txtUserName.Text = "ghy@you-may.cn";
+            this.txtUserName.Text = "youmaytest@126.com";
             // 
             // label3
             // 
@@ -98,6 +98,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(168, 21);
             this.txtPassword.TabIndex = 2;
+            this.txtPassword.Text = "youmaytest00";
             // 
             // btnReceive
             // 
