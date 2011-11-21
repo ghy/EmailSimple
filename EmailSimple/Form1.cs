@@ -148,28 +148,47 @@ namespace EmailSimple
             string to = txtTo.Text;
 
             var email = new MailMessage();
-            email.SubjectEncoding = Encoding.UTF8; //邮件编码 
             email.From = new MailAddress(emailaddress, "Hello");//你的邮
-
             foreach (var item in to.Trim(';').Split(';'))
             {
                 email.To.Add(new MailAddress(item));
             }
 
-            email.Subject = txtSubject.Text;
-            //   message.CC.Add(new MailAddress("3400415@qq.com")); //抄送
-            email.IsBodyHtml = true; //正文是否是HTML
-            email.BodyEncoding = System.Text.Encoding.UTF8;
-            email.Body = "b";// "问题提出者:【苹果电脑公司】【USER】问题窗口：【小萍】\n【测试新问题】\n问题链接：【http://st002:1005/Issue/Detail/12?searchType=3】"; //txtBody.Text; //正文
-            //FileStream fs = File.OpenRead(@"z:\FCSS\Upload\90979535-9877-4106-926a-e63458528be8.jpg");
+            //设置邮件主题的编码格式
+            email.SubjectEncoding = Encoding.UTF8;
 
-            //message.Attachments.Add(new System.Net.Mail.Attachment(fs, "aaa.txt")); //附件
-            email.Priority = System.Net.Mail.MailPriority.High; //优先级
+            //设置邮件主题的编码格式
+            email.SubjectEncoding = Encoding.UTF8;
+            //设置邮件的主题
+            email.Subject = "a"; //emailView.Subject;
+            //设置邮件正文的编码格式
+            email.BodyEncoding = Encoding.UTF8;
+            //设置邮件内容
+            email.Body = "b"; //emailView.Body;
+            //设置邮件的优先级
+            email.Priority = MailPriority.High;
+            email.IsBodyHtml = true;
+
+
+
+            //email.Subject = txtSubject.Text;
+            ////   message.CC.Add(new MailAddress("3400415@qq.com")); //抄送
+            //email.IsBodyHtml = true; //正文是否是HTML
+            //email.BodyEncoding = System.Text.Encoding.UTF8;
+            //email.Body = "b";// "问题提出者:【苹果电脑公司】【USER】问题窗口：【小萍】\n【测试新问题】\n问题链接：【http://st002:1005/Issue/Detail/12?searchType=3】"; //txtBody.Text; //正文
+
+            string path = txtPath.Text;
+            FileStream fs = File.OpenRead(path);
+
+            email.Attachments.Add(new System.Net.Mail.Attachment(fs, "你好.msg")); //附件
+            // email.Priority = System.Net.Mail.MailPriority.High; //优先级
             try
             {
                 System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(smtpServer, smtpPort); // 587;//Gmail使用的端口
+                client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential(emailaddress, password); //这里是申请的邮箱和密码
-                client.EnableSsl = false;//必须经过ssl加密
+
+                //client.EnableSsl = false;//必须经过ssl加密
                 client.Send(email);
                 MessageBox.Show("邮件已经成功发送到" + email.To.ToString());
             }
@@ -188,44 +207,5 @@ namespace EmailSimple
         }
 
 
-        //private void sendmail()
-        //{
-        //    string smtpServer = this.txtSmtpServer.Text;
-        //    string email = txtEmail.Text;
-        //    string password = txtPassword.Text;
-        //    int smtpPort = Convert.ToInt32(txtSmtpPort.Text);
-        //    string to = txtTo.Text;
-
-        //    MailMessage message = new MailMessage();
-        //    message.SubjectEncoding = Encoding.UTF8; //邮件编码 
-        //    var from = new MailAddress(email, "Hello");//你的邮
-        //    message.From = from;
-
-        //    foreach (var item in to.Trim(';').Split(';'))
-        //    {
-        //        message.To.Add(new MailAddress(item));
-        //    }
-
-        //    message.Subject = txtSubject.Text;
-        //    //   message.CC.Add(new MailAddress("3400415@qq.com")); //抄送
-        //    message.IsBodyHtml = true; //正文是否是HTML
-        //    message.BodyEncoding = System.Text.Encoding.UTF8;
-        //    message.Body = txtBody.Text; //正文
-        //    //message.Attachments.Add(new Attachment(@"c:\1.txt")); //附件
-        //    message.Priority = System.Net.Mail.MailPriority.High; //优先级
-        //    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(smtpServer, smtpPort); // 587;//Gmail使用的端口
-        //    client.Credentials = new System.Net.NetworkCredential(email, password); //这里是申请的邮箱和密码
-        //    client.EnableSsl = true;//必须经过ssl加密
-
-        //    try
-        //    {
-        //        client.Send(message);
-        //        MessageBox.Show("邮件已经成功发送到" + message.To.ToString());
-        //    }
-        //    catch (Exception ee)
-        //    {
-        //        MessageBox.Show(ee.Message);
-        //    }
-        //}
     }
 }

@@ -50,6 +50,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtPath = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listBox1
@@ -249,6 +251,23 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(87, 460);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "path";
+            // 
+            // txtPath
+            // 
+            this.txtPath.Location = new System.Drawing.Point(134, 454);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(262, 21);
+            this.txtPath.TabIndex = 2;
+            this.txtPath.Text = "c:\\\\1.msg";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -259,6 +278,8 @@
             this.Controls.Add(this.btnReceive);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtPath);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSmtpServer);
@@ -308,6 +329,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtPath;
     }
 }
 
